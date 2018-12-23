@@ -20,8 +20,8 @@ public class Room {
     @Column(name = "seats_num")
     private int numberOfSeats;
 
-    @Column(name = "conference_id")
-    private Long conference_id;
+    @Column(name = "conference_name")
+    private String conference_name;
 
     public String getRoomName() {
         return room_name;
@@ -39,18 +39,18 @@ public class Room {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public Long getConferenceId() {
-        return conference_id;
+    public String getConferenceName() {
+        return conference_name;
     }
 
-    public void setConferenceId(Long conference_id) {
-        this.conference_id = conference_id;
+    public void setConferenceName(String conference_name) {
+        this.conference_name = conference_name;
     }
 
-    public Room(@NonNull String room_name, @NonNull int numberOfSeats, Long conference_id) {
+    public Room(@NonNull String room_name, @NonNull int numberOfSeats, String conference_name) {
         this.room_name = room_name;
         this.numberOfSeats = numberOfSeats;
-        this.conference_id = conference_id;
+        this.conference_name = conference_name;
     }
 
     public Room() {

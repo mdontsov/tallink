@@ -14,21 +14,17 @@ create table conference
   id              int(12) not null auto_increment,
   conference_name varchar(40),
   active          bit,
-  guest_id        int(12),
-  primary key (id),
-  constraint guest_fk foreign key (guest_id) references guest (id)
-    on update cascade on delete cascade
+  guest_full_name varchar(60),
+  primary key (id)
 );
 
 create table room
 (
-  id            int(12)     not null auto_increment,
-  room_name     varchar(40) not null,
-  seats_num     int(3),
-  conference_id int(12),
-  primary key (id),
-  constraint conference_fk foreign key (conference_id) references conference (id)
-    on update cascade on delete cascade
+  id              int(12)     not null auto_increment,
+  room_name       varchar(40) not null,
+  seats_num       int(3),
+  conference_name varchar(60),
+  primary key (id)
 );
 
 insert into room (room_name, seats_num)

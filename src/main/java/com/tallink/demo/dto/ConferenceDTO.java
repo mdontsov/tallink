@@ -8,7 +8,7 @@ public class ConferenceDTO {
 
     private boolean active;
 
-    private Long guest_id;
+    private String guest_full_name;
 
     public Long getId() {
         return id;
@@ -34,19 +34,19 @@ public class ConferenceDTO {
         this.active = active;
     }
 
-    public Long getGuestId() {
-        return guest_id;
+    public String getFullName() {
+        return guest_full_name;
     }
 
-    public void setGuestId(Long guest_id) {
-        this.guest_id = guest_id;
+    public void setFullName(String guest_full_name) {
+        this.guest_full_name = guest_full_name;
     }
 
-    public ConferenceDTO(Long id, String conference_name, boolean active, Long guest_id) {
+    public ConferenceDTO(Long id, String conference_name, boolean active, String guest_full_name) {
         this.id = id;
         this.conference_name = conference_name;
         this.active = active;
-        this.guest_id = guest_id;
+        this.guest_full_name = guest_full_name;
     }
 
     public ConferenceDTO() {

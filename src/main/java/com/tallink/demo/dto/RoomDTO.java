@@ -8,7 +8,7 @@ public class RoomDTO {
 
     private int seats_num;
 
-    private Long conference_id;
+    private String conference_name;
 
     public Long getId() {
         return id;
@@ -34,22 +34,22 @@ public class RoomDTO {
         this.seats_num = seats_num;
     }
 
-    public Long getConferenceId() {
-        return conference_id;
+    public String getConferenceName() {
+        return conference_name;
     }
 
-    public void setConferenceId(Long conference_id) {
-        this.conference_id = conference_id;
+    public void setConferenceName(String conference_name) {
+        this.conference_name = conference_name;
     }
 
-    public RoomDTO(Long id, String room_name, int seats_num, Long conference_id) {
+    public RoomDTO(Long id, String room_name, int seats_num, String conference_name) {
         this.id = id;
         this.room_name = room_name;
         this.seats_num = seats_num;
-        this.conference_id = conference_id;
+        this.conference_name = conference_name;
     }
 
     public RoomDTO() {
-        
+
     }
 }

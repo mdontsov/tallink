@@ -6,7 +6,9 @@ public class RoomDTO {
 
     private String room_name;
 
-    private int numberOfSeats;
+    private int seats_num;
+
+    private Long conference_id;
 
     public Long getId() {
         return id;
@@ -16,29 +18,38 @@ public class RoomDTO {
         this.id = id;
     }
 
-    public String getRoom_name() {
+    public String getRoomName() {
         return room_name;
     }
 
-    public void setRoom_name(String room_name) {
+    public void setRoomName(String room_name) {
         this.room_name = room_name;
     }
 
-    public int getNumberOfSeats() {
-        return numberOfSeats;
+    public int getSeatsNum() {
+        return seats_num;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
+    public void setSeatsNum(int seats_num) {
+        this.seats_num = seats_num;
     }
 
-    public RoomDTO(Long id, String room_name, int numberOfSeats) {
+    public Long getConferenceId() {
+        return conference_id;
+    }
+
+    public void setConferenceId(Long conference_id) {
+        this.conference_id = conference_id;
+    }
+
+    public RoomDTO(Long id, String room_name, int seats_num, Long conference_id) {
         this.id = id;
         this.room_name = room_name;
-        this.numberOfSeats = numberOfSeats;
+        this.seats_num = seats_num;
+        this.conference_id = conference_id;
     }
 
     public RoomDTO() {
-
+        
     }
 }

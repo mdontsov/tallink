@@ -6,9 +6,9 @@ public class ConferenceDTO {
 
     private String conference_name;
 
-    private String guest_full_name;
-
     private boolean active;
+
+    private Long guest_id;
 
     public Long getId() {
         return id;
@@ -26,14 +26,6 @@ public class ConferenceDTO {
         this.conference_name = conference_name;
     }
 
-    public String getFullName() {
-        return guest_full_name;
-    }
-
-    public void setFullName(String guest_full_name) {
-        this.guest_full_name = guest_full_name;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -42,11 +34,19 @@ public class ConferenceDTO {
         this.active = active;
     }
 
-    public ConferenceDTO(Long id, String conference_name, String guest_full_name, boolean active) {
+    public Long getGuestId() {
+        return guest_id;
+    }
+
+    public void setGuestId(Long guest_id) {
+        this.guest_id = guest_id;
+    }
+
+    public ConferenceDTO(Long id, String conference_name, boolean active, Long guest_id) {
         this.id = id;
         this.conference_name = conference_name;
-        this.guest_full_name = guest_full_name;
         this.active = active;
+        this.guest_id = guest_id;
     }
 
     public ConferenceDTO() {

@@ -1,13 +1,13 @@
 package com.tallink.demo.repository;
 
+import com.tallink.demo.dto.ConferenceDTO;
 import com.tallink.demo.model.Conference;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
+import java.util.Set;
 
 /**
  * Query projection doesn't work as expected yet
@@ -19,7 +19,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO conference (conference_name, guest_full_name, active) VALUES (?, 'Conference Host', true)",
+    @Query(value = "INSERT INTO conference (conference_name, active) VALUES (?, true)",
             nativeQuery = true)
     void createNewConference(String conferenceName);
 
@@ -45,5 +45,5 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     void removeGuestFromConference(String guestFullName);
 
     @Query(value = "select * from conference", nativeQuery = true)
-    List<Conference> getAllConferences();
+    Set<ConferenceDTO> getAllConferences();
 }

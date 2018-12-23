@@ -1,9 +1,8 @@
 package com.tallink.demo.model;
 
 import lombok.*;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "room")
@@ -18,17 +17,11 @@ public class Room {
     private String room_name;
 
     @NonNull
-    @Column(name = "seats_number")
+    @Column(name = "seats_num")
     private int numberOfSeats;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "conference_room", joinColumns = @JoinColumn(name = "room_id"),
-//            inverseJoinColumns = @JoinColumn(name = "conference_id"))
-//    private List<Conference> conference = new ArrayList<>();
-
-    public Room() {
-
-    }
+    @Column(name = "conference_id")
+    private Long conference_id;
 
     public String getRoomName() {
         return room_name;
@@ -46,16 +39,21 @@ public class Room {
         this.numberOfSeats = numberOfSeats;
     }
 
-//    public List<Conference> getConference() {
-//        return conference;
-//    }
-//
-//    public void setConference(List<Conference> conference) {
-//        this.conference = conference;
-//    }
+    public Long getConferenceId() {
+        return conference_id;
+    }
 
-    public Room(@NonNull String room_name, @NonNull int numberOfSeats) {
+    public void setConferenceId(Long conference_id) {
+        this.conference_id = conference_id;
+    }
+
+    public Room(@NonNull String room_name, @NonNull int numberOfSeats, Long conference_id) {
         this.room_name = room_name;
         this.numberOfSeats = numberOfSeats;
+        this.conference_id = conference_id;
+    }
+
+    public Room() {
+
     }
 }

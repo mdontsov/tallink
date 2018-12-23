@@ -15,7 +15,6 @@ create table conference
   conference_name varchar(40),
   active          bit,
   guest_full_name varchar(60),
-  primary key (conference_name)
 );
 
 create table room
@@ -24,7 +23,6 @@ create table room
   room_name       varchar(40) not null,
   seats_num       int(3),
   conference_name varchar(60),
-  primary key (room_name)
 );
 
 insert into room (room_name, seats_num)

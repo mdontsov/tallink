@@ -23,15 +23,15 @@ public class TestController {
     @Autowired
     GuestRepository guestRepository;
 
-    @PatchMapping(value = "conference/create/{conference_name}")
-    public void createNewConference(@PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.createNewConference(conferenceName);
+    @PatchMapping(value = "conference/new/{conference_name}")
+    public void newConference(@PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.newConference(conferenceName);
     }
 
     @PatchMapping(value = "conference/addGuest/{guest_full_name}, {conference_name}")
     public void addGuestToExistingConference(@PathVariable("guest_full_name") String guestFullName,
                                              @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.addGuestToExistingConference(guestFullName, conferenceName);
+        conferenceRepository.addGuest(guestFullName, conferenceName);
     }
 
     @PatchMapping(value = "room/newConference/{conference_name}, {room_name}")
@@ -73,6 +73,6 @@ public class TestController {
     @PostMapping(value = "conference/register/{full_name}, {conference_name}")
     public void registerGuestToConference(@PathVariable("full_name") String guestFullName,
                                           @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.registerGuestToConference(guestFullName, conferenceName);
+        conferenceRepository.registerGuest(guestFullName, conferenceName);
     }
 }

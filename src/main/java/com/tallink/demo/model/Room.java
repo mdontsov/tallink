@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Table(name = "room")
 public class Room {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
     private Long row_id;
 
-    @Id
     @NonNull
     @Column(name = "room_name")
     private String room_name;

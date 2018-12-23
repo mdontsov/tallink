@@ -21,7 +21,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     @Modifying
     @Query(value = "INSERT INTO conference (conference_name, active) VALUES (?, true)",
             nativeQuery = true)
-    void createNewConference(String conferenceName);
+    void newConference(String conferenceName);
 
     @Transactional
     @Modifying
@@ -35,20 +35,20 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET guest_full_name = (SELECT guest.full_name\n" +
+    @Query(value = "UPDATE conference SET guest_full_name = (SELECT DISTINCT guest.full_name\n" +
             "FROM guest WHERE full_name = ?) WHERE guest_full_name IS NULL AND conference_name = ?", nativeQuery = true)
-    void addGuestToExistingConference(String guestFullName, String conferenceName);
+    void addGuest(String guestFullName, String conferenceName);
 
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO conference (guest_full_name, conference_name, active) VALUES\n" +
             "(?, ?, true)", nativeQuery = true)
-    void registerGuestToConference(String guestFullName, String conferenceName);
+    void registerGuest(String guestFullName, String conferenceName);
 
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM conference WHERE guest_full_name = ?", nativeQuery = true)
-    void removeGuestFromConference(String guestFullName);
+    void removeGuest(String guestFullName);
 
     @Query(value = "select * from conference", nativeQuery = true)
     Set<Conference> findConferences();

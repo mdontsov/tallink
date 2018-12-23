@@ -24,7 +24,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE room SET conference_name = (SELECT conference.conference_name\n" +
+    @Query(value = "UPDATE room SET conference_name = (SELECT DISTINCT conference.conference_name\n" +
             "FROM conference WHERE conference_name = ?) WHERE conference_name IS NULL AND room_name = ?", nativeQuery = true)
     void addConferenceToRoom(String conferenceName, String roomName);
 }

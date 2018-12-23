@@ -15,8 +15,8 @@ public class Room {
     private Long id;
 
     @NonNull
-    @Column(name = "name")
-    private String name;
+    @Column(name = "room_name")
+    private String room_name;
 
     @NonNull
     @Column(name = "seats_number")
@@ -31,12 +31,12 @@ public class Room {
 
     }
 
-    public String getName() {
-        return name;
+    public String getRoomName() {
+        return room_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoomName(String room_name) {
+        this.room_name = room_name;
     }
 
     public int getNumberOfSeats() {
@@ -55,8 +55,8 @@ public class Room {
         this.conference = conference;
     }
 
-    public Room(@NonNull String name, @NonNull int numberOfSeats) {
-        this.name = name;
+    public Room(@NonNull String room_name, @NonNull int numberOfSeats) {
+        this.room_name = room_name;
         this.numberOfSeats = numberOfSeats;
     }
 }

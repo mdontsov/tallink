@@ -5,9 +5,8 @@ DROP TABLE IF EXISTS conference_room;
 CREATE TABLE conference
 (
   id          INT(12) NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(40),
-  guest_fname VARCHAR(40),
-  guest_lname VARCHAR(40),
+  conference_name        VARCHAR(40),
+  guest_full_name VARCHAR(60),
   active    BIT,
   PRIMARY KEY (id)
 );
@@ -15,12 +14,12 @@ CREATE TABLE conference
 CREATE TABLE room
 (
   id           INT(12) NOT NULL AUTO_INCREMENT,
-  name         VARCHAR(40),
+  room_name         VARCHAR(40),
   seats_number INT(3),
   PRIMARY KEY (id)
 );
 
-INSERT INTO room (name, seats_number)
+INSERT INTO room (room_name, seats_number)
 VALUES ('Cherucruz', 20),
        ('Marshallazora Satanwest', 30),
        ('Aleshark', 10),
@@ -29,7 +28,7 @@ VALUES ('Cherucruz', 20),
        ('Murratenna Brooksplanethopper', 5);
 
 ALTER TABLE room
-  ALTER COLUMN name SET NOT NULL;
+  ALTER COLUMN room_name SET NOT NULL;
 ALTER TABLE room
   ALTER COLUMN seats_number SET NOT NULL;
 

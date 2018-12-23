@@ -4,13 +4,11 @@ public class ConferenceDTO {
 
     private Long id;
 
-    private String name;
+    private String conference_name;
 
-    private String guestFirstName;
+    private String guest_full_name;
 
-    private String guestLastName;
-
-    private boolean isActive;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -20,43 +18,38 @@ public class ConferenceDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getConferenceName() {
+        return conference_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setConferenceName(String conference_name) {
+        this.conference_name = conference_name;
     }
 
-    public String getGuestFirstName() {
-        return guestFirstName;
+    public String getFullName() {
+        return guest_full_name;
     }
 
-    public void setGuestFirstName(String guestFirstName) {
-        this.guestFirstName = guestFirstName;
-    }
-
-    public String getGuestLastName() {
-        return guestLastName;
-    }
-
-    public void setGuestLastName(String guestLastName) {
-        this.guestLastName = guestLastName;
+    public void setFullName(String guest_full_name) {
+        this.guest_full_name = guest_full_name;
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
-    public ConferenceDTO(Long id, String name, String guestFirstName, String guestLastName, boolean isActive) {
+    public ConferenceDTO(Long id, String conference_name, String guest_full_name, boolean active) {
         this.id = id;
-        this.name = name;
-        this.guestFirstName = guestFirstName;
-        this.guestLastName = guestLastName;
-        this.isActive = isActive;
+        this.conference_name = conference_name;
+        this.guest_full_name = guest_full_name;
+        this.active = active;
+    }
+
+    public ConferenceDTO() {
+
     }
 }

@@ -19,20 +19,30 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO conference (name, active) VALUES (?, true)", nativeQuery = true)
-    void createNewConference(String name);
+    @Query(value = "INSERT INTO conference (conference_name, guest_full_name, active) VALUES (?, 'Conference Host', true)",
+            nativeQuery = true)
+    void createNewConference(String conferenceName);
 
-    @Query(value = "UPDATE conference SET active = 'false' WHERE name = ?", nativeQuery = true)
-    void cancelConference();
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE conference SET active = 'false' WHERE conference_name = ?", nativeQuery = true)
+    void cancelConference(String conferenceName);
 
-    @Query(value = "DELETE FROM conference WHERE name = ?", nativeQuery = true)
-    void deleteConference();
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM conference WHERE conference_name = ?", nativeQuery = true)
+    void deleteConference(String conferenceName);
 
-    @Query(value = "INSERT INTO conference (guest_fname, guest_lname) VALUES (?, ?) WHERE name = ?", nativeQuery = true)
-    void addGuestToConference();
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO conference (conference_name, guest_full_name, active) VALUES (?, ?, true)",
+            nativeQuery = true)
+    void addGuestToConference(String conferenceName, String guestFullName);
 
-    @Query(value = "DELETE FROM conference WHERE guest_fname = ? AND guest_lname = ?", nativeQuery = true)
-    void removeGuestFromConference();
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM conference WHERE guest_full_name = ?", nativeQuery = true)
+    void removeGuestFromConference(String guestFullName);
 
     @Query(value = "select * from conference", nativeQuery = true)
     List<Conference> getAllConferences();

@@ -35,9 +35,9 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO conference (conference_name, guest_full_name, active) VALUES (?, ?, true)",
+    @Query(value = "INSERT INTO conference (guest_full_name, conference_name, active) VALUES (?, ?, true)",
             nativeQuery = true)
-    void addGuestToConference(String conferenceName, String guestFullName);
+    void addGuestToConference(String guestFullName, String conferenceName);
 
     @Transactional
     @Modifying

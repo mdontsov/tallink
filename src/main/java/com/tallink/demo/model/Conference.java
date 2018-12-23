@@ -1,11 +1,8 @@
 package com.tallink.demo.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.*;
 
-@Data
 @Entity(name = "Conference")
 @Table(name = "conference")
 public class Conference {
@@ -23,10 +20,10 @@ public class Conference {
     @Column(name = "active")
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            mappedBy = "conference")
-    private List<Room> room = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            mappedBy = "conference")
+//    private List<Room> room = new ArrayList<>();
 
     public Conference() {
 
@@ -56,13 +53,13 @@ public class Conference {
         this.active = active;
     }
 
-    public List<Room> getRoom() {
-        return room;
-    }
-
-    public void setRoom(List<Room> room) {
-        this.room = room;
-    }
+//    public List<Room> getRoom() {
+//        return room;
+//    }
+//
+//    public void setRoom(List<Room> room) {
+//        this.room = room;
+//    }
 
     public Conference(String conference_name, String guest_full_name, boolean active) {
         this.conference_name = conference_name;

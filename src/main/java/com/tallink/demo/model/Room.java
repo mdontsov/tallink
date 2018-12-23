@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "room")
 public class Room {
@@ -22,10 +21,10 @@ public class Room {
     @Column(name = "seats_number")
     private int numberOfSeats;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "conference_room", joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "conference_id"))
-    private List<Conference> conference = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "conference_room", joinColumns = @JoinColumn(name = "room_id"),
+//            inverseJoinColumns = @JoinColumn(name = "conference_id"))
+//    private List<Conference> conference = new ArrayList<>();
 
     public Room() {
 
@@ -47,13 +46,13 @@ public class Room {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public List<Conference> getConference() {
-        return conference;
-    }
-
-    public void setConference(List<Conference> conference) {
-        this.conference = conference;
-    }
+//    public List<Conference> getConference() {
+//        return conference;
+//    }
+//
+//    public void setConference(List<Conference> conference) {
+//        this.conference = conference;
+//    }
 
     public Room(@NonNull String room_name, @NonNull int numberOfSeats) {
         this.room_name = room_name;

@@ -23,10 +23,10 @@ public class TestController {
         conferenceRepository.createNewConference(conferenceName);
     }
 
-    @PatchMapping(value = "conference/newGuest/{conference_name}, {guest_full_name}")
-    public void registerNewGuest(@PathVariable("conference_name") String conferenceName,
-                                 @PathVariable("guest_full_name") String guestFullName) {
-        conferenceRepository.addGuestToConference(conferenceName, guestFullName);
+    @PatchMapping(value = "conference/newGuest/{guest_full_name}, {conference_name}")
+    public void registerNewGuest(@PathVariable("guest_full_name") String guestFullName,
+                                 @PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.addGuestToConference(guestFullName, conferenceName);
     }
 
     @PutMapping(value = "conference/cancelConference/{conference_name}")

@@ -7,6 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
+/**
+ * Query projection doesn't work as expected yet
+ * https://jira.spring.io/browse/DATAJPA-1003
+ */
+
 @Repository
 public interface GuestRepository extends JpaRepository<Guest, Long> {
 
@@ -14,4 +21,7 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     @Modifying
     @Query(value = "INSERT INTO guest (full_name) VALUES (?)", nativeQuery = true)
     void createNewGuest(String conferenceName);
+
+    @Query(value = "select * from guest", nativeQuery = true)
+    Set<Guest> findGuests();
 }

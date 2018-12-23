@@ -2,7 +2,7 @@ package com.tallink.demo.dto;
 
 public class RoomDTO {
 
-    private Long id;
+    private Long row_id;
 
     private String room_name;
 
@@ -10,12 +10,12 @@ public class RoomDTO {
 
     private String conference_name;
 
-    public Long getId() {
-        return id;
+    public Long getRow_id() {
+        return row_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRow_id(Long row_id) {
+        this.row_id = row_id;
     }
 
     public String getRoomName() {
@@ -42,8 +42,8 @@ public class RoomDTO {
         this.conference_name = conference_name;
     }
 
-    public RoomDTO(Long id, String room_name, int seats_num, String conference_name) {
-        this.id = id;
+    public RoomDTO(Long row_id, String room_name, int seats_num, String conference_name) {
+        this.row_id = row_id;
         this.room_name = room_name;
         this.seats_num = seats_num;
         this.conference_name = conference_name;

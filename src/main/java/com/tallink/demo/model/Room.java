@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Table(name = "room")
 public class Room {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @NonNull
+    private Long row_id;
 
+    @Id
     @NonNull
     @Column(name = "room_name")
     private String room_name;
@@ -22,6 +22,14 @@ public class Room {
 
     @Column(name = "conference_name")
     private String conference_name;
+
+    public Long getRowId() {
+        return row_id;
+    }
+
+    public void setRowId(Long row_id) {
+        this.row_id = row_id;
+    }
 
     public String getRoomName() {
         return room_name;
@@ -47,7 +55,8 @@ public class Room {
         this.conference_name = conference_name;
     }
 
-    public Room(@NonNull String room_name, @NonNull int numberOfSeats, String conference_name) {
+    public Room(@NonNull Long row_id, @NonNull String room_name, @NonNull int numberOfSeats, String conference_name) {
+        this.row_id = row_id;
         this.room_name = room_name;
         this.numberOfSeats = numberOfSeats;
         this.conference_name = conference_name;

@@ -37,7 +37,13 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     @Modifying
     @Query(value = "UPDATE conference SET guest_full_name = (SELECT guest.full_name\n" +
             "FROM guest WHERE full_name = ?) WHERE guest_full_name IS NULL AND conference_name = ?", nativeQuery = true)
-    void addGuestToConference(String guestFullName, String conferenceName);
+    void addGuestToExistingConference(String guestFullName, String conferenceName);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO conference (guest_full_name, conference_name, active) VALUES\n" +
+            "(?, ?, true)", nativeQuery = true)
+    void registerGuestToConference(String guestFullName, String conferenceName);
 
     @Transactional
     @Modifying
@@ -45,5 +51,5 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     void removeGuestFromConference(String guestFullName);
 
     @Query(value = "select * from conference", nativeQuery = true)
-    Set<Conference> getAllConferences();
+    Set<Conference> findConferences();
 }

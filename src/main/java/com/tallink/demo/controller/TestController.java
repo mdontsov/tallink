@@ -1,8 +1,7 @@
 package com.tallink.demo.controller;
 
-import com.tallink.demo.dto.ConferenceDTO;
-import com.tallink.demo.dto.RoomDTO;
 import com.tallink.demo.model.Conference;
+import com.tallink.demo.model.Guest;
 import com.tallink.demo.model.Room;
 import com.tallink.demo.repository.ConferenceRepository;
 import com.tallink.demo.repository.GuestRepository;
@@ -24,39 +23,56 @@ public class TestController {
     @Autowired
     GuestRepository guestRepository;
 
-    @PatchMapping(value = "conference/newConference/{conference_name}")
+    @PatchMapping(value = "conference/create/{conference_name}")
     public void createNewConference(@PathVariable("conference_name") String conferenceName) {
         conferenceRepository.createNewConference(conferenceName);
     }
 
-    @PatchMapping(value = "conference/newGuest/{guest_full_name}, {conference_name}")
-    public void registerNewGuest(@PathVariable("guest_full_name") String guestFullName,
-                                 @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.addGuestToConference(guestFullName, conferenceName);
+    @PatchMapping(value = "conference/addGuest/{guest_full_name}, {conference_name}")
+    public void addGuestToExistingConference(@PathVariable("guest_full_name") String guestFullName,
+                                             @PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.addGuestToExistingConference(guestFullName, conferenceName);
     }
 
-    @PutMapping(value = "conference/cancelConference/{conference_name}")
+    @PatchMapping(value = "room/newConference/{conference_name}, {room_name}")
+    public void registerNewConference(@PathVariable("conference_name") String conferenceName,
+                                      @PathVariable("room_name") String roomName) {
+        roomRepository.addConferenceToRoom(conferenceName, roomName);
+    }
+
+    @PutMapping(value = "conference/cancel/{conference_name}")
     public void cancelConference(@PathVariable("conference_name") String conferenceName) {
         conferenceRepository.cancelConference(conferenceName);
     }
 
-    @DeleteMapping(value = "conference/deleteConference/{conference_name}")
+    @DeleteMapping(value = "conference/delete/{conference_name}")
     public void deleteConference(@PathVariable("conference_name") String conferenceName) {
         conferenceRepository.deleteConference(conferenceName);
     }
 
-    @GetMapping(value = "conference/getConferences")
-    public Set<Conference> getAllConferences() {
-        return conferenceRepository.getAllConferences();
+    @GetMapping(value = "conference/find")
+    public Set<Conference> findConferences() {
+        return conferenceRepository.findConferences();
     }
 
-    @GetMapping(value = "room/getRooms")
-    public Set<Room> getAllRooms() {
-        return roomRepository.getAllRooms();
+    @GetMapping(value = "room/find")
+    public Set<Room> findRooms() {
+        return roomRepository.findRooms();
     }
 
-    @PostMapping(value = "guest/newGuest/{full_name}")
+    @GetMapping(value = "guest/find")
+    public Set<Guest> findGuests() {
+        return guestRepository.findGuests();
+    }
+
+    @PostMapping(value = "guest/create/{full_name}")
     public void createNewGuest(@PathVariable("full_name") String guestFullName) {
         guestRepository.createNewGuest(guestFullName);
+    }
+
+    @PostMapping(value = "conference/register/{full_name}, {conference_name}")
+    public void registerGuestToConference(@PathVariable("full_name") String guestFullName,
+                                          @PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.registerGuestToConference(guestFullName, conferenceName);
     }
 }

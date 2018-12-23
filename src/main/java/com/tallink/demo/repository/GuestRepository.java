@@ -12,7 +12,6 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO guest (full_name) VALUES (?)",
-            nativeQuery = true)
+    @Query(value = "INSERT INTO guest (full_name) VALUES (?)", nativeQuery = true)
     void createNewGuest(String conferenceName);
 }

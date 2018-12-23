@@ -18,5 +18,5 @@ import java.util.Set;
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query(value = "select * from room ", nativeQuery = true)
-    Set<RoomDTO> getAllRooms();
+    Set<Room> getAllRooms();
 }

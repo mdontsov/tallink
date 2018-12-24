@@ -1,7 +1,5 @@
 package com.tallink.demo.model;
 
-import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,15 +8,13 @@ public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
+    @Column(name = "row_id")
     private Long row_id;
 
-    @NonNull
-    @Column(name = "room_name")
+    @Column(name = "room_name", nullable = false)
     private String room_name;
 
-    @NonNull
-    @Column(name = "seats_num")
+    @Column(name = "seats_num", nullable = false)
     private int numberOfSeats;
 
     @Column(name = "conference_name")
@@ -56,8 +52,7 @@ public class Room {
         this.conference_name = conference_name;
     }
 
-    public Room(@NonNull Long row_id, @NonNull String room_name, @NonNull int numberOfSeats, String conference_name) {
-        this.row_id = row_id;
+    public Room(String room_name, int numberOfSeats, String conference_name) {
         this.room_name = room_name;
         this.numberOfSeats = numberOfSeats;
         this.conference_name = conference_name;

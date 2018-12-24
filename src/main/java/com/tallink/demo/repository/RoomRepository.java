@@ -15,16 +15,21 @@ import java.util.Set;
  * https://jira.spring.io/browse/DATAJPA-1003
  */
 
-
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    @Query(value = "select * from room ", nativeQuery = true)
+    @Query(value = "SELECT * FROM room ", nativeQuery = true)
     Set<Room> findRooms();
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE room SET conference_name = (SELECT DISTINCT conference.conference_name\n" +
-            "FROM conference WHERE conference_name = ?) WHERE conference_name IS NULL AND room_name = ?", nativeQuery = true)
-    void addConferenceToRoom(String conferenceName, String roomName);
+            "FROM conference WHERE conference_name = ?) WHERE conference_name IS NULL AND room_name = ?",
+            nativeQuery = true)
+    void addConference(String conferenceName, String roomName);
+
+    @Query(value = "SELECT room.room_name, room.seats_num FROM room WHERE EXISTS (SELECT COUNT\n" +
+            "(conference.guest_full_name) FROM conference HAVING COUNT (conference.guest_full_name)\n" +
+            " < room.seats_num)", nativeQuery = true)
+    Set<Room> findAvailableRoom();
 }

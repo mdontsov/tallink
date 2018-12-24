@@ -28,16 +28,16 @@ public class TestController {
         conferenceRepository.newConference(conferenceName);
     }
 
-    @PatchMapping(value = "conference/addGuest/{guest_full_name}, {conference_name}")
-    public void addGuestToExistingConference(@PathVariable("guest_full_name") String guestFullName,
-                                             @PathVariable("conference_name") String conferenceName) {
+    @PatchMapping(value = "conference/add/{guest_full_name}, {conference_name}")
+    public void addGuest(@PathVariable("guest_full_name") String guestFullName,
+                         @PathVariable("conference_name") String conferenceName) {
         conferenceRepository.addGuest(guestFullName, conferenceName);
     }
 
-    @PatchMapping(value = "room/newConference/{conference_name}, {room_name}")
-    public void registerNewConference(@PathVariable("conference_name") String conferenceName,
-                                      @PathVariable("room_name") String roomName) {
-        roomRepository.addConferenceToRoom(conferenceName, roomName);
+    @PatchMapping(value = "room/add/{conference_name}, {room_name}")
+    public void addConference(@PathVariable("conference_name") String conferenceName,
+                              @PathVariable("room_name") String roomName) {
+        roomRepository.addConference(conferenceName, roomName);
     }
 
     @PutMapping(value = "conference/cancel/{conference_name}")
@@ -66,13 +66,23 @@ public class TestController {
     }
 
     @PostMapping(value = "guest/create/{full_name}")
-    public void createNewGuest(@PathVariable("full_name") String guestFullName) {
-        guestRepository.createNewGuest(guestFullName);
+    public void createNew(@PathVariable("full_name") String guestFullName) {
+        guestRepository.createNew(guestFullName);
     }
 
     @PostMapping(value = "conference/register/{full_name}, {conference_name}")
-    public void registerGuestToConference(@PathVariable("full_name") String guestFullName,
-                                          @PathVariable("conference_name") String conferenceName) {
+    public void registerGuest(@PathVariable("full_name") String guestFullName,
+                              @PathVariable("conference_name") String conferenceName) {
         conferenceRepository.registerGuest(guestFullName, conferenceName);
+    }
+
+    @DeleteMapping(value = "conference/remove/{guest_full_name}")
+    public void removeGuest(@PathVariable("guest_full_name") String guestFullName) {
+        conferenceRepository.removeGuest(guestFullName);
+    }
+
+    @GetMapping(value = "room/available")
+    public Set<Room> findAvailableRoom() {
+        return roomRepository.findAvailableRoom();
     }
 }

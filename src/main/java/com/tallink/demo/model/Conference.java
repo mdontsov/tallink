@@ -1,7 +1,5 @@
 package com.tallink.demo.model;
 
-import lombok.NonNull;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +8,7 @@ public class Conference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
+    @Column(name = "row_id")
     private Long row_id;
 
     @Column(name = "conference_name")
@@ -54,8 +52,7 @@ public class Conference {
         this.guest_full_name = guest_full_name;
     }
 
-    public Conference(@NonNull Long row_id, String conference_name, boolean active, String guest_full_name) {
-        this.row_id = row_id;
+    public Conference(String conference_name, boolean active, String guest_full_name) {
         this.conference_name = conference_name;
         this.active = active;
         this.guest_full_name = guest_full_name;

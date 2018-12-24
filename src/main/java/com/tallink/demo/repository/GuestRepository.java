@@ -1,5 +1,6 @@
 package com.tallink.demo.repository;
 
+import com.tallink.demo.dto.GuestDTO;
 import com.tallink.demo.model.Guest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,8 +21,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO guest (full_name) VALUES (?)", nativeQuery = true)
-    void createNewGuest(String conferenceName);
+    void createNew(String conferenceName);
 
-    @Query(value = "select * from guest", nativeQuery = true)
+    @Query(value = "SELECT * FROM guest", nativeQuery = true)
     Set<Guest> findGuests();
 }

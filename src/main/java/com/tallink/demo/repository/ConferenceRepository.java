@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Set;
 
 /**
@@ -47,9 +48,9 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM conference WHERE guest_full_name = ?", nativeQuery = true)
+    @Query(value = "UPDATE conference SET guest_full_name = NULL WHERE guest_full_name = ?", nativeQuery = true)
     void removeGuest(String guestFullName);
 
-    @Query(value = "select * from conference", nativeQuery = true)
+    @Query(value = "SELECT * FROM conference", nativeQuery = true)
     Set<Conference> findConferences();
 }

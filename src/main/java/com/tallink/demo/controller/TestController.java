@@ -76,9 +76,10 @@ public class TestController {
         conferenceRepository.registerGuest(guestFullName, conferenceName);
     }
 
-    @PutMapping(value = "conference/remove/{guest_full_name}")
-    public void removeGuest(@PathVariable("guest_full_name") String guestFullName) {
-        conferenceRepository.removeGuest(guestFullName);
+    @PutMapping(value = "conference/remove/{guest_full_name}, {conference_name}")
+    public void removeGuest(@PathVariable("guest_full_name") String guestFullName,
+                            @PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.removeGuest(guestFullName, conferenceName);
     }
 
     @GetMapping(value = "room/available")
@@ -86,8 +87,9 @@ public class TestController {
         return roomRepository.findAvailableRoom();
     }
 
-    @PutMapping(value = "room/remove/{conference_name}")
-    public void removeConference(@PathVariable("conference_name") String conferenceName) {
-        roomRepository.removeConference(conferenceName);
+    @PutMapping(value = "room/remove/{conference_name}, {room_name}")
+    public void removeConference(@PathVariable("conference_name") String conferenceName,
+                                 @PathVariable("room_name") String roomName) {
+        roomRepository.removeConference(conferenceName, roomName);
     }
 }

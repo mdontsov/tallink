@@ -35,6 +35,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE room SET conference_name = NULL WHERE conference_name = ?", nativeQuery = true)
-    void removeConference(String conferenceName);
+    @Query(value = "UPDATE room SET conference_name = NULL WHERE conference_name = ? AND\n" +
+            "room_name = ?", nativeQuery = true)
+    void removeConference(String conferenceName, String roomName);
 }

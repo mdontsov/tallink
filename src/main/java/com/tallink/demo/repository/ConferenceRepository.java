@@ -48,8 +48,9 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET guest_full_name = NULL WHERE guest_full_name = ?", nativeQuery = true)
-    void removeGuest(String guestFullName);
+    @Query(value = "UPDATE conference SET guest_full_name = NULL WHERE guest_full_name = ? AND\n" +
+            "conference_name = ?", nativeQuery = true)
+    void removeGuest(String guestFullName, String conferenceName);
 
     @Query(value = "SELECT * FROM conference", nativeQuery = true)
     Set<Conference> findConferences();

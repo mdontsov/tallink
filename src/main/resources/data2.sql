@@ -33,7 +33,5 @@ values ('Cherucruz', 20),
        ('Yompson Hamoondancer', 10),
        ('Murratenna Brooksplanethopper', 5);
 
-alter table room
-  alter column room_name set not null;
-alter table room
-  alter column seats_num set not null;
+alter table room alter column room_name set not null;
+alter table room alter column seats_num set not null;

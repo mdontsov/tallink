@@ -28,8 +28,13 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             nativeQuery = true)
     void addConference(String conferenceName, String roomName);
 
-    @Query(value = "SELECT room.room_name, room.seats_num FROM room WHERE EXISTS (SELECT COUNT\n" +
-            "(conference.guest_full_name) FROM conference HAVING COUNT (conference.guest_full_name)\n" +
+    @Query(value = "SELECT * FROM room WHERE EXISTS (SELECT COUNT (conference.guest_full_name) FROM conference\n" +
+            "WHERE conference.guest_full_name IS NOT NULL HAVING COUNT (conference.guest_full_name)\n" +
             " < room.seats_num)", nativeQuery = true)
     Set<Room> findAvailableRoom();
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE room SET conference_name = NULL WHERE conference_name = ?", nativeQuery = true)
+    void removeConference(String conferenceName);
 }

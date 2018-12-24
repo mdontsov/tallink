@@ -76,7 +76,7 @@ public class TestController {
         conferenceRepository.registerGuest(guestFullName, conferenceName);
     }
 
-    @DeleteMapping(value = "conference/remove/{guest_full_name}")
+    @PutMapping(value = "conference/remove/{guest_full_name}")
     public void removeGuest(@PathVariable("guest_full_name") String guestFullName) {
         conferenceRepository.removeGuest(guestFullName);
     }
@@ -84,5 +84,10 @@ public class TestController {
     @GetMapping(value = "room/available")
     public Set<Room> findAvailableRoom() {
         return roomRepository.findAvailableRoom();
+    }
+
+    @PutMapping(value = "room/remove/{conference_name}")
+    public void removeConference(@PathVariable("conference_name") String conferenceName) {
+        roomRepository.removeConference(conferenceName);
     }
 }

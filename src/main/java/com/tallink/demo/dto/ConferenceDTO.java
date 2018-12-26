@@ -2,28 +2,28 @@ package com.tallink.demo.dto;
 
 public class ConferenceDTO {
 
-    private Long row_id;
+    private Long id;
 
-    private String conference_name;
+    private String conferenceName;
 
     private boolean active;
 
-    private String guest_full_name;
+    private String guestFullName;
 
-    public Long getRow_id() {
-        return row_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setRow_id(Long row_id) {
-        this.row_id = row_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getConferenceName() {
-        return conference_name;
+        return conferenceName;
     }
 
-    public void setConferenceName(String conference_name) {
-        this.conference_name = conference_name;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
     public boolean isActive() {
@@ -34,19 +34,25 @@ public class ConferenceDTO {
         this.active = active;
     }
 
-    public String getFullName() {
-        return guest_full_name;
+    public String getGuestFullName() {
+        return guestFullName;
     }
 
-    public void setFullName(String guest_full_name) {
-        this.guest_full_name = guest_full_name;
+    public void setGuestFullName(String guestFullName) {
+        this.guestFullName = guestFullName;
     }
 
-    public ConferenceDTO(Long row_id, String conference_name, boolean active, String guest_full_name) {
-        this.row_id = row_id;
-        this.conference_name = conference_name;
-        this.active = active;
-        this.guest_full_name = guest_full_name;
+    public ConferenceDTO(Long id, String conferenceName, String guestFullName) {
+        this.id = id;
+        this.conferenceName = conferenceName;
+        this.active = true;
+        this.guestFullName = guestFullName;
+    }
+
+    public ConferenceDTO(Long id, String conferenceName) {
+        this.id = id;
+        this.conferenceName = conferenceName;
+        this.active = true;
     }
 
     public ConferenceDTO() {

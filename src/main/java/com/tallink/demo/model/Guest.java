@@ -7,11 +7,11 @@ import javax.persistence.*;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "full_name")
-    private String full_name;
+    private String fullName;
 
     public long getId() {
         return id;
@@ -22,15 +22,15 @@ public class Guest {
     }
 
     public String getFullName() {
-        return full_name;
+        return fullName;
     }
 
-    public void setFullName(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public Guest(String full_name) {
-        this.full_name = full_name;
+    public Guest(String fullName) {
+        this.fullName = fullName;
     }
 
     public Guest() {

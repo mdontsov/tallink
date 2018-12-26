@@ -23,31 +23,49 @@ public class TestController {
     @Autowired
     GuestRepository guestRepository;
 
-    @PatchMapping(value = "conference/new/{conference_name}")
-    public void newConference(@PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.newConference(conferenceName);
+    @PatchMapping(value = "conference/create")
+    public void newConference(@RequestBody Conference conference) {
+        conferenceRepository.createConference(conference.getConferenceName());
     }
 
-    @PatchMapping(value = "conference/add/{guest_full_name}, {conference_name}")
-    public void addGuest(@PathVariable("guest_full_name") String guestFullName,
-                         @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.addGuest(guestFullName, conferenceName);
+    @PatchMapping(value = "conference/addGuest")
+    public void addGuest(@RequestBody Conference conference) {
+        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
     }
 
-    @PatchMapping(value = "room/add/{conference_name}, {room_name}")
-    public void addConference(@PathVariable("conference_name") String conferenceName,
-                              @PathVariable("room_name") String roomName) {
-        roomRepository.addConference(conferenceName, roomName);
+    @PatchMapping(value = "guest/update")
+    public void update(@RequestBody Guest guest) {
+        guestRepository.updateGuestName(guest.getFullName());
     }
 
-    @PutMapping(value = "conference/cancel/{conference_name}")
-    public void cancelConference(@PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.cancelConference(conferenceName);
+    @PostMapping(value = "guest/create")
+    public void createNew(@RequestBody Guest guest) {
+        guestRepository.createGuest(guest.getFullName());
     }
 
-    @DeleteMapping(value = "conference/delete/{conference_name}")
-    public void deleteConference(@PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.deleteConference(conferenceName);
+    @PatchMapping(value = "room/add")
+    public void addConference(@RequestBody Room room) {
+        roomRepository.addConference(room.getConferenceName(), room.getRoomName());
+    }
+
+    @PutMapping(value = "conference/cancel")
+    public void cancelConference(@RequestBody Conference conference) {
+        conferenceRepository.cancelConference(conference.getConferenceName());
+    }
+
+    @PutMapping(value = "conference/disable")
+    public void disableConference(@RequestBody Conference conference) {
+        conferenceRepository.disableConference(conference.getConferenceName());
+    }
+
+    @PutMapping(value = "conference/update")
+    public void updateConferenceName(@RequestBody Conference conference, String newConferenceName) {
+        conferenceRepository.updateConferenceName(newConferenceName, conference.getConferenceName());
+    }
+
+    @DeleteMapping(value = "conference/delete")
+    public void deleteConference(@RequestBody Conference conference) {
+        conferenceRepository.deleteConference(conference.getConferenceName());
     }
 
     @GetMapping(value = "conference/find")
@@ -65,21 +83,14 @@ public class TestController {
         return guestRepository.findGuests();
     }
 
-    @PostMapping(value = "guest/create/{full_name}")
-    public void createNew(@PathVariable("full_name") String guestFullName) {
-        guestRepository.createNew(guestFullName);
+    @PostMapping(value = "conference/register")
+    public void registerGuest(@RequestBody Conference conference) {
+        conferenceRepository.registerGuest(conference.getGuestFullName(), conference.getConferenceName());
     }
 
-    @PostMapping(value = "conference/register/{full_name}, {conference_name}")
-    public void registerGuest(@PathVariable("full_name") String guestFullName,
-                              @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.registerGuest(guestFullName, conferenceName);
-    }
-
-    @PutMapping(value = "conference/remove/{guest_full_name}, {conference_name}")
-    public void removeGuest(@PathVariable("guest_full_name") String guestFullName,
-                            @PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.removeGuest(guestFullName, conferenceName);
+    @PutMapping(value = "conference/remove")
+    public void removeGuest(@RequestBody Conference conference) {
+        conferenceRepository.removeGuest(conference.getGuestFullName(), conference.getConferenceName());
     }
 
     @GetMapping(value = "room/available")
@@ -87,9 +98,8 @@ public class TestController {
         return roomRepository.findAvailableRoom();
     }
 
-    @PutMapping(value = "room/remove/{conference_name}, {room_name}")
-    public void removeConference(@PathVariable("conference_name") String conferenceName,
-                                 @PathVariable("room_name") String roomName) {
-        roomRepository.removeConference(conferenceName, roomName);
+    @PutMapping(value = "room/remove")
+    public void removeConference(@RequestBody Room room) {
+        roomRepository.removeConference(room.getConferenceName(), room.getRoomName());
     }
 }

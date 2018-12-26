@@ -2,51 +2,57 @@ package com.tallink.demo.dto;
 
 public class RoomDTO {
 
-    private Long row_id;
+    private Long id;
 
-    private String room_name;
+    private String roomName;
 
-    private int seats_num;
+    private int numberOfSeats;
 
-    private String conference_name;
+    private String conferenceName;
 
-    public Long getRow_id() {
-        return row_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setRow_id(Long row_id) {
-        this.row_id = row_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRoomName() {
-        return room_name;
+        return roomName;
     }
 
-    public void setRoomName(String room_name) {
-        this.room_name = room_name;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
-    public int getSeatsNum() {
-        return seats_num;
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-    public void setSeatsNum(int seats_num) {
-        this.seats_num = seats_num;
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
     public String getConferenceName() {
-        return conference_name;
+        return conferenceName;
     }
 
-    public void setConferenceName(String conference_name) {
-        this.conference_name = conference_name;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
-    public RoomDTO(Long row_id, String room_name, int seats_num, String conference_name) {
-        this.row_id = row_id;
-        this.room_name = room_name;
-        this.seats_num = seats_num;
-        this.conference_name = conference_name;
+    public RoomDTO(Long id, String roomName, int numberOfSeats, String conferenceName) {
+        this.id = id;
+        this.roomName = roomName;
+        this.numberOfSeats = numberOfSeats;
+        this.conferenceName = conferenceName;
+    }
+
+    public RoomDTO(Long id, String roomName, int numberOfSeats) {
+        this.id = id;
+        this.roomName = roomName;
+        this.numberOfSeats = numberOfSeats;
     }
 
     public RoomDTO() {

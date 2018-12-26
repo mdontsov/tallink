@@ -7,33 +7,33 @@ import javax.persistence.*;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "row_id")
-    private Long row_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "room_name", nullable = false)
-    private String room_name;
+    private String roomName;
 
     @Column(name = "seats_num", nullable = false)
     private int numberOfSeats;
 
     @Column(name = "conference_name")
-    private String conference_name;
+    private String conferenceName;
 
-    public Long getRowId() {
-        return row_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setRowId(Long row_id) {
-        this.row_id = row_id;
+    public void setId(Long row_id) {
+        this.id = row_id;
     }
 
     public String getRoomName() {
-        return room_name;
+        return roomName;
     }
 
-    public void setRoomName(String room_name) {
-        this.room_name = room_name;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public int getNumberOfSeats() {
@@ -45,17 +45,22 @@ public class Room {
     }
 
     public String getConferenceName() {
-        return conference_name;
+        return conferenceName;
     }
 
-    public void setConferenceName(String conference_name) {
-        this.conference_name = conference_name;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
-    public Room(String room_name, int numberOfSeats, String conference_name) {
-        this.room_name = room_name;
+    public Room(String roomName, int numberOfSeats, String conferenceName) {
+        this.roomName = roomName;
         this.numberOfSeats = numberOfSeats;
-        this.conference_name = conference_name;
+        this.conferenceName = conferenceName;
+    }
+
+    public Room(String roomName, int numberOfSeats) {
+        this.roomName = roomName;
+        this.numberOfSeats = numberOfSeats;
     }
 
     public Room() {

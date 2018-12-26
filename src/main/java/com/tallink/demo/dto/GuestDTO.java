@@ -4,7 +4,7 @@ public class GuestDTO {
 
     private Long id;
 
-    private String full_name;
+    private String fullName;
 
     public Long getId() {
         return id;
@@ -15,16 +15,16 @@ public class GuestDTO {
     }
 
     public String getFullName() {
-        return full_name;
+        return fullName;
     }
 
-    public void setFullName(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public GuestDTO(Long id, String full_name) {
+    public GuestDTO(Long id, String fullName) {
         this.id = id;
-        this.full_name = full_name;
+        this.fullName = fullName;
     }
 
     public GuestDTO() {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TestController {
 
@@ -25,7 +26,7 @@ public class TestController {
 
     @PatchMapping(value = "conference/create")
     Conference createConference(@RequestBody Conference conference) {
-        return conferenceRepository.createConference(conference.getConferenceName());
+        return conferenceRepository.save(new Conference(conference.getConferenceName()));
     }
 
     @PatchMapping(value = "conference/addGuest")
@@ -53,6 +54,11 @@ public class TestController {
         conferenceRepository.cancelConference(conference.getConferenceName());
     }
 
+    @PutMapping(value = "conference/cancel/{conference_name}")
+    public void cancelConference(@PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.cancelConference(conferenceName);
+    }
+
     @PutMapping(value = "conference/disable")
     public void disableConference(@RequestBody Conference conference) {
         conferenceRepository.disableConference(conference.getConferenceName());
@@ -61,6 +67,12 @@ public class TestController {
     @PutMapping(value = "conference/update")
     public void updateConferenceName(@RequestBody Conference conference, String newConferenceName) {
         conferenceRepository.updateConferenceName(newConferenceName, conference.getConferenceName());
+    }
+
+    @PutMapping(value = "conference/update/{conference_name}")
+    public void updateConferenceNameByRequest(@RequestBody Conference conference,
+                                     @PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.updateConferenceName(conference.getConferenceName(), conferenceName);
     }
 
     @DeleteMapping(value = "conference/delete")

@@ -20,7 +20,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO conference (conference_name, active) VALUES (?, true)", nativeQuery = true)
-    void createConference(String conferenceName);
+    Conference createConference(String conferenceName);
 
     @Transactional
     @Modifying
@@ -64,4 +64,9 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Query(value = "SELECT * FROM conference", nativeQuery = true)
     Set<Conference> findConferences();
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM conference", nativeQuery = true)
+    void deleteAllConferences();
 }

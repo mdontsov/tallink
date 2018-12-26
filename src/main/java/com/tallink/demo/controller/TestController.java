@@ -24,8 +24,8 @@ public class TestController {
     GuestRepository guestRepository;
 
     @PatchMapping(value = "conference/create")
-    public void newConference(@RequestBody Conference conference) {
-        conferenceRepository.createConference(conference.getConferenceName());
+    Conference createConference(@RequestBody Conference conference) {
+        return conferenceRepository.createConference(conference.getConferenceName());
     }
 
     @PatchMapping(value = "conference/addGuest")
@@ -68,6 +68,16 @@ public class TestController {
         conferenceRepository.deleteConference(conference.getConferenceName());
     }
 
+    @DeleteMapping(value = "conference/delete/{conference_name}")
+    public void deleteConference(@PathVariable("conference_name") String conferenceName) {
+        conferenceRepository.deleteConference(conferenceName);
+    }
+
+    @DeleteMapping(value = "conference/deleteAll")
+    public void deleteAllConferences() {
+        conferenceRepository.deleteAllConferences();
+    }
+
     @GetMapping(value = "conference/find")
     public Set<Conference> findConferences() {
         return conferenceRepository.findConferences();
@@ -96,6 +106,11 @@ public class TestController {
     @GetMapping(value = "room/available")
     public Set<Room> findAvailableRoom() {
         return roomRepository.findAvailableRoom();
+    }
+
+    @GetMapping(value = "room/available/{conference_name}")
+    public Set<Room> findAvailableRoom(@PathVariable("conference_name") String conferenceName) {
+        return roomRepository.findAvailableRoomByConferenceName(conferenceName);
     }
 
     @PutMapping(value = "room/remove")

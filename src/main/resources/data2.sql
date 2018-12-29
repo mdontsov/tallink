@@ -6,6 +6,7 @@ create table guest
 (
   id        int(3) not null auto_increment,
   full_name VARCHAR(60),
+  birth_date date,
   primary key (id)
 );
 

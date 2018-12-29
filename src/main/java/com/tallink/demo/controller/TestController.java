@@ -123,8 +123,8 @@ public class TestController {
     }
 
     @GetMapping(value = "room/findAvailable")
-    public Set<Room> findAvailableRoom(@RequestBody Conference conference) {
-        return roomRepository.findAvailableRoomByConferenceName(conference.getConferenceName());
+    public Set<Room> findAvailableRoom(@RequestParam String conferenceName) {
+        return roomRepository.findAvailableRoomByConferenceName(conferenceName);
     }
 
     @PutMapping(value = "room/remove")

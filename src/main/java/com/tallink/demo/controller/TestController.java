@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -37,11 +35,45 @@ public class TestController {
     EventRepository eventRepository;
 
     @PatchMapping(value = "conference/create")
-    void createConference(@RequestBody Conference conference) {
-//        return conferenceRepository.save(new Conference(conference.getConferenceName()));
-        conferenceRepository.createConference(conference.getConferenceName());
+    public Conference createConference(@RequestBody Conference conference) {
+        return conferenceRepository.save(new Conference(conference.getConferenceName()));
     }
 
+    @PatchMapping(value = "guest/create")
+    public Guest createGuest(@RequestBody Guest guest) {
+        return guestRepository.save(new Guest(guest.getFullName(), guest.getBirthDate()));
+    }
+
+    @PatchMapping(value = "event/create")
+    public Event createEvent(@RequestBody Event event) {
+        return eventRepository.save(new Event(event.getConferenceName(), event.getGuestFullName()));
+    }
+
+    @GetMapping(value = "conference")
+    public Set<Conference> findConferences() {
+        return conferenceRepository.findConferences();
+    }
+
+    @GetMapping(value = "guest")
+    public Set<Guest> findGuests() {
+        return guestRepository.findGuests();
+    }
+
+    @GetMapping(value = "event")
+    public Set<Event> findEvents() {
+        return eventRepository.findEvents();
+    }
+
+    @PutMapping(value = "event/removeGuest/{f_name}")
+    public void removeGuest(@PathVariable("f_name") String guestFullName) {
+        eventRepository.removeGuest(guestFullName);
+    }
+
+    @DeleteMapping(value = "event/deleteConference/{c_name}")
+    public void deleteConference(@PathVariable("c_name") String conferenceName) {
+        eventRepository.deleteConference(conferenceName);
+    }
+/***********************************************************************************/
 //    @PatchMapping(value = "conference/addGuest")
 //    public void addGuest(@RequestBody Conference conference) {
 //        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
@@ -52,10 +84,10 @@ public class TestController {
         guestRepository.updateGuestName(guest.getFullName());
     }
 
-    @PatchMapping(value = "guest/create")
-    public void createNew(@RequestBody Guest guest) {
-        guestRepository.createGuest(guest.getFullName(), String.valueOf(guest.getBirthDate()));
-    }
+//    @PatchMapping(value = "guest/create")
+//    public void createNew(@RequestBody Guest guest) {
+//        guestRepository.createGuest(guest.getFullName(), String.valueOf(guest.getBirthDate()));
+//    }
 
     @PatchMapping(value = "room/add")
     public void addConference(@RequestBody Room room) {
@@ -93,24 +125,9 @@ public class TestController {
         conferenceRepository.updateConferenceName(conference.getConferenceName(), conferenceName);
     }
 
-    @DeleteMapping(value = "conference/delete")
-    public void deleteConference(@RequestBody Conference conference) {
-        conferenceRepository.deleteConference(conference.getConferenceName());
-    }
-
-    @DeleteMapping(value = "conference/delete/{conference_name}")
-    public void deleteConference(@PathVariable("conference_name") String conferenceName) {
-        conferenceRepository.deleteConference(conferenceName);
-    }
-
     @DeleteMapping(value = "conference/deleteAll")
     public void deleteAllConferences() {
         conferenceRepository.deleteAllConferences();
-    }
-
-    @GetMapping(value = "conference")
-    public Set<Conference> findConferences() {
-        return conferenceRepository.findConferences();
     }
 
     @GetMapping(value = "room/find")
@@ -118,19 +135,9 @@ public class TestController {
         return roomRepository.findRooms();
     }
 
-    @GetMapping(value = "guest/find")
-    public Set<Guest> findGuests() {
-        return guestRepository.findGuests();
-    }
-
     @PatchMapping(value = "conference/registerEvent")
     public void registerEvent(@RequestBody Event event) {
         eventRepository.registerEvemt(event.getConferenceName(), event.getGuestFullName());
-    }
-
-    @PutMapping(value = "conference/remove/{guest_full_name}")
-    public void removeGuest(@PathVariable("guest_full_name") String guestFullName) {
-        conferenceRepository.removeGuest(guestFullName);
     }
 
     @GetMapping(value = "room/findAvailable")
@@ -146,11 +153,5 @@ public class TestController {
     @GetMapping(value = "conference/getName")
     Set<Conference> getConferenceName() {
         return conferenceRepository.getName();
-    }
-
-    @GetMapping(value = "conferenceList")
-    List<String> getConferenceList() {
-        TypedQuery<String> query = manager.createQuery("SELECT DISTINCT conferenceName FROM Conference", String.class);
-        return query.getResultList();
     }
 }

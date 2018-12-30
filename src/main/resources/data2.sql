@@ -5,7 +5,7 @@ drop table if exists event;
 
 create table guest
 (
-  id        int(3) not null auto_increment,
+  id int(3) not null auto_increment,
   g_name VARCHAR(60),
   birth_date date,
   primary key (id)
@@ -13,18 +13,18 @@ create table guest
 
 create table conference
 (
-  id          int(3) not null auto_increment,
+  id int(3) not null auto_increment,
   c_name varchar(40),
-  active          bit,
+  active bit,
   primary key (id),
   unique (c_name)
 );
 
 create table room
 (
-  id          int(3)      not null auto_increment,
-  r_name       varchar(40) not null,
-  seats_num       int(3),
+  id int(3) not null auto_increment,
+  r_name varchar(40) not null,
+  seats_num int(3),
   c_name varchar(60),
   primary key (id)
 );

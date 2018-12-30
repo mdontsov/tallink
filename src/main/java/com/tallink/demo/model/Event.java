@@ -19,6 +19,14 @@ public class Event {
     @Column(name = "r_name")
     private String roomName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getConferenceName() {
         return conferenceName;
     }

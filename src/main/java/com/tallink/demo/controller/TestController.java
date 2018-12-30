@@ -34,19 +34,19 @@ public class TestController {
     @Autowired
     EventRepository eventRepository;
 
-    @PatchMapping(value = "conference/create")
+    @PostMapping(value = "conference/create")
     public Conference createConference(@RequestBody Conference conference) {
         return conferenceRepository.save(new Conference(conference.getConferenceName()));
     }
 
-    @PatchMapping(value = "guest/create")
+    @PostMapping(value = "guest/create")
     public Guest createGuest(@RequestBody Guest guest) {
         return guestRepository.save(new Guest(guest.getFullName(), guest.getBirthDate()));
     }
 
-    @PatchMapping(value = "event/create")
+    @PostMapping(value = "event/create")
     public Event createEvent(@RequestBody Event event) {
-        return eventRepository.save(new Event(event.getConferenceName(), event.getGuestFullName()));
+        return eventRepository.save(new Event(event.getGuestFullName(), event.getConferenceName()));
     }
 
     @GetMapping(value = "conference")
@@ -73,12 +73,22 @@ public class TestController {
     public void deleteConference(@PathVariable("c_name") String conferenceName) {
         eventRepository.deleteConference(conferenceName);
     }
-/***********************************************************************************/
+
+    @PostMapping(value = "event/registerEvent")
+    public void registerEvent(@RequestBody Event event) {
+        eventRepository.registerEvemt(event.getGuestFullName(), event.getConferenceName());
+    }
+
+    @DeleteMapping(value = "guest/deleteAll")
+    public void deleteAllGuests() {
+        guestRepository.deleteAllGuests();
+    }
+
+    /***********************************************************************************/
 //    @PatchMapping(value = "conference/addGuest")
 //    public void addGuest(@RequestBody Conference conference) {
 //        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
 //    }
-
     @PatchMapping(value = "guest/update")
     public void update(@RequestBody Guest guest) {
         guestRepository.updateGuestName(guest.getFullName());
@@ -133,11 +143,6 @@ public class TestController {
     @GetMapping(value = "room/find")
     public Set<Room> findRooms() {
         return roomRepository.findRooms();
-    }
-
-    @PatchMapping(value = "conference/registerEvent")
-    public void registerEvent(@RequestBody Event event) {
-        eventRepository.registerEvemt(event.getConferenceName(), event.getGuestFullName());
     }
 
     @GetMapping(value = "room/findAvailable")

@@ -10,11 +10,11 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "c_name")
-    private String conferenceName;
-
     @Column(name = "g_name")
     private String guestFullName;
+
+    @Column(name = "c_name")
+    private String conferenceName;
 
     @Column(name = "r_name")
     private String roomName;
@@ -27,20 +27,20 @@ public class Event {
         this.id = id;
     }
 
-    public String getConferenceName() {
-        return conferenceName;
-    }
-
-    public void setConferenceName(String conferenceName) {
-        this.conferenceName = conferenceName;
-    }
-
     public String getGuestFullName() {
         return guestFullName;
     }
 
     public void setGuestFullName(String guestFullName) {
         this.guestFullName = guestFullName;
+    }
+
+    public String getConferenceName() {
+        return conferenceName;
+    }
+
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
     public String getRoomName() {
@@ -51,15 +51,15 @@ public class Event {
         this.roomName = roomName;
     }
 
-    public Event(String conferenceName, String guestFullName, String roomName) {
-        this.conferenceName = conferenceName;
+    public Event(String guestFullName, String conferenceName, String roomName) {
         this.guestFullName = guestFullName;
+        this.conferenceName = conferenceName;
         this.roomName = roomName;
     }
 
-    public Event(String conferenceName, String guestFullName) {
-        this.conferenceName = conferenceName;
+    public Event(String guestFullName, String conferenceName) {
         this.guestFullName = guestFullName;
+        this.conferenceName = conferenceName;
     }
 
     public Event() {

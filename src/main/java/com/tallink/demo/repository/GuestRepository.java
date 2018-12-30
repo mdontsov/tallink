@@ -30,4 +30,9 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     @Query(value = "SELECT * FROM guest", nativeQuery = true)
     Set<Guest> findGuests();
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM guest", nativeQuery = true)
+    void deleteAllGuests();
 }

@@ -13,7 +13,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO event (c_name, g_name) VALUES ((select c_name FROM conference WHERE c_name = ? AND\n" +
-            " c_name IS NOT  NULL), (SELECT DISTINCT g_name FROM guest WHERE g_name = ? AND g_name IS NOT NULL))", nativeQuery = true)
+            " c_name IS NOT  NULL), (SELECT g_name FROM guest WHERE g_name = ? AND g_name IS NOT NULL))", nativeQuery = true)
     void registerEvemt(String conferenceName, String guestFullName);
 
     @Query(value = "SELECT * FROM event", nativeQuery = true)
@@ -26,6 +26,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE from event WHERE c_name = ? AND c_name IS NOT NULL", nativeQuery = true)
+    @Query(value = "DELETE from event WHERE c_name = ?", nativeQuery = true)
     void deleteConference(String conferenceName);
 }

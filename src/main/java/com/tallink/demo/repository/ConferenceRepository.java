@@ -21,54 +21,59 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET active = 'false' WHERE conference_name = ? AND conference_name\n" +
+    @Query(value = "INSERT INTO conference (c_name, active) VALUES (?, true)", nativeQuery = true)
+    void createConference(String conferenceName);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE conference SET active = 'false' WHERE c_name = ? AND c_name\n" +
             " IS NOT NULL", nativeQuery = true)
     void cancelConference(String conferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET active = 'true' WHERE conference_name = ? AND conference_name\n" +
+    @Query(value = "UPDATE conference SET active = 'true' WHERE c_name = ? AND c_name\n" +
             " IS NOT NULL", nativeQuery = true)
     void activateConference(String conferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET conference_name = ? WHERE conference_name = ? AND conference_name\n" +
+    @Query(value = "UPDATE conference SET c_name = ? WHERE c_name = ? AND c_name\n" +
             " IS NOT NULL", nativeQuery = true)
     void updateConferenceName(String newConferenceName, String oldConferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM conference WHERE conference_name = ? AND conference_name IS NOT NULL", nativeQuery = true)
+    @Query(value = "DELETE FROM conference WHERE c_name = ? AND c_name IS NOT NULL", nativeQuery = true)
     void deleteConference(String conferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET conference_name = NULL WHERE conference_name = ?", nativeQuery = true)
+    @Query(value = "UPDATE conference SET c_name = NULL WHERE c_name = ?", nativeQuery = true)
     void disableConference(String conferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET guest_full_name = (SELECT DISTINCT full_name FROM guest WHERE full_name = ?\n" +
-            " AND full_name IS NOT NULL) WHERE guest_full_name IS NULL AND conference_name = (SELECT DISTINCT\n" +
-            " conference_name FROM conference WHERE conference_name = ?)", nativeQuery = true)
+    @Query(value = "UPDATE conference SET f_name = (SELECT DISTINCT full_name FROM guest WHERE full_name = ?\n" +
+            " AND full_name IS NOT NULL) WHERE f_name IS NULL AND c_name = (SELECT DISTINCT\n" +
+            " c_name FROM conference WHERE c_name = ?)", nativeQuery = true)
     void addGuest(String guestFullName, String conferenceName);
 
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO conference (guest_full_name, conference_name, active) VALUES\n" +
-            " (?, ?, true)", nativeQuery = true)
-    void registerGuest(String guestFullName, String conferenceName);
+//    @Transactional
+//    @Modifying
+//    @Query(value = "INSERT INTO conference (f_name, c_name, active) VALUES\n" +
+//            " (?, ?, true)", nativeQuery = true)
+//    void registerGuest(String guestFullName, String conferenceName);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE conference SET guest_full_name = NULL WHERE guest_full_name = ?", nativeQuery = true)
+    @Query(value = "UPDATE conference SET f_name = NULL WHERE f_name = ?", nativeQuery = true)
     void removeGuest(String guestFullName);
 
     @Query(value = "SELECT * FROM conference", nativeQuery = true)
     Set<Conference> findConferences();
 
-    @Query(value = "SELECT * FROM conference WHERE conference_name = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM conference WHERE c_name = ?", nativeQuery = true)
     Optional<Conference> findConferenceByName(String conferenceName);
 
     @Transactional
@@ -76,6 +81,6 @@ public interface ConferenceRepository extends JpaRepository<Conference, Long> {
     @Query(value = "DELETE FROM conference", nativeQuery = true)
     void deleteAllConferences();
 
-    @Query(value = "SELECT * FROM conference WHERE conference_name IS NOT NULL", nativeQuery = true)
+    @Query(value = "SELECT * FROM conference WHERE c_name IS NOT NULL", nativeQuery = true)
     Set<Conference> getName();
 }

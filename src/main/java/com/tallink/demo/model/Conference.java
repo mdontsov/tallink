@@ -11,14 +11,11 @@ public class Conference {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "conference_name")
+    @Column(name = "c_name")
     private String conferenceName;
 
     @Column(name = "active")
     private boolean active;
-
-    @Column(name = "guest_full_name")
-    private String guestFullName;
 
     public Long getId() {
         return id;
@@ -42,20 +39,6 @@ public class Conference {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public String getGuestFullName() {
-        return guestFullName;
-    }
-
-    public void setGuestFullName(String guestFullName) {
-        this.guestFullName = guestFullName;
-    }
-
-    public Conference(String conferenceName, String guestFullName) {
-        this.conferenceName = conferenceName;
-        this.active = true;
-        this.guestFullName = guestFullName;
     }
 
     public Conference(String conferenceName) {

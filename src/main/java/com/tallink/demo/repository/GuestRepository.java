@@ -20,12 +20,12 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO guest (full_name) VALUES (?)", nativeQuery = true)
-    void createGuest(String guestFullName);
+    @Query(value = "INSERT INTO guest (g_name, birth_date) VALUES (?, ?)", nativeQuery = true)
+    void createGuest(String guestFullName, String birthDate);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE guest SET full_name = ?", nativeQuery = true)
+    @Query(value = "UPDATE guest SET f_name = ?", nativeQuery = true)
     void updateGuestName(String guestFullName);
 
     @Query(value = "SELECT * FROM guest", nativeQuery = true)

@@ -1,9 +1,11 @@
 package com.tallink.demo.controller;
 
 import com.tallink.demo.model.Conference;
+import com.tallink.demo.model.Event;
 import com.tallink.demo.model.Guest;
 import com.tallink.demo.model.Room;
 import com.tallink.demo.repository.ConferenceRepository;
+import com.tallink.demo.repository.EventRepository;
 import com.tallink.demo.repository.GuestRepository;
 import com.tallink.demo.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,26 +33,28 @@ public class TestController {
     @Autowired
     GuestRepository guestRepository;
 
+    @Autowired
+    EventRepository eventRepository;
+
     @PatchMapping(value = "conference/create")
-    Conference createConference(@RequestBody Conference conference) {
-        conference.setGuestFullName("Conference Host");
-        return conferenceRepository.save(new Conference(conference.getConferenceName(),
-                conference.getGuestFullName()));
+    void createConference(@RequestBody Conference conference) {
+//        return conferenceRepository.save(new Conference(conference.getConferenceName()));
+        conferenceRepository.createConference(conference.getConferenceName());
     }
 
-    @PatchMapping(value = "conference/addGuest")
-    public void addGuest(@RequestBody Conference conference) {
-        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
-    }
+//    @PatchMapping(value = "conference/addGuest")
+//    public void addGuest(@RequestBody Conference conference) {
+//        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
+//    }
 
     @PatchMapping(value = "guest/update")
     public void update(@RequestBody Guest guest) {
         guestRepository.updateGuestName(guest.getFullName());
     }
 
-    @PostMapping(value = "guest/create")
+    @PatchMapping(value = "guest/create")
     public void createNew(@RequestBody Guest guest) {
-        guestRepository.createGuest(guest.getFullName());
+        guestRepository.createGuest(guest.getFullName(), String.valueOf(guest.getBirthDate()));
     }
 
     @PatchMapping(value = "room/add")
@@ -120,9 +123,9 @@ public class TestController {
         return guestRepository.findGuests();
     }
 
-    @PatchMapping(value = "conference/registerGuest")
-    public void registerGuest(@RequestBody Conference conference) {
-        conferenceRepository.registerGuest(conference.getGuestFullName(), conference.getConferenceName());
+    @PatchMapping(value = "conference/registerEvent")
+    public void registerEvent(@RequestBody Event event) {
+        eventRepository.registerEvemt(event.getConferenceName(), event.getGuestFullName());
     }
 
     @PutMapping(value = "conference/remove/{guest_full_name}")

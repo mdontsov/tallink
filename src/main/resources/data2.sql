@@ -1,11 +1,12 @@
 drop table if exists guest;
 drop table if exists room;
 drop table if exists conference;
+drop table if exists event;
 
 create table guest
 (
   id        int(3) not null auto_increment,
-  full_name VARCHAR(60),
+  g_name VARCHAR(60),
   birth_date date,
   primary key (id)
 );
@@ -13,22 +14,22 @@ create table guest
 create table conference
 (
   id          int(3) not null auto_increment,
-  conference_name varchar(40),
+  c_name varchar(40),
   active          bit,
-  guest_full_name varchar(60),
-  primary key (id)
+  primary key (id),
+  unique (c_name)
 );
 
 create table room
 (
   id          int(3)      not null auto_increment,
-  room_name       varchar(40) not null,
+  r_name       varchar(40) not null,
   seats_num       int(3),
-  conference_name varchar(60),
+  c_name varchar(60),
   primary key (id)
 );
 
-insert into room (room_name, seats_num)
+insert into room (r_name, seats_num)
 values ('Cherucruz', 20),
        ('Marshallazora Satanwest', 30),
        ('Aleshark', 10),
@@ -36,5 +37,14 @@ values ('Cherucruz', 20),
        ('Yompson Hamoondancer', 10),
        ('Murratenna Brooksplanethopper', 5);
 
-alter table room alter column room_name set not null;
+alter table room alter column r_name set not null;
 alter table room alter column seats_num set not null;
+
+create table event
+(
+id int(3) not null auto_increment,
+c_name varchar(60),
+g_name varchar(60),
+r_name varchar(60),
+primary key (id)
+)

@@ -11,13 +11,13 @@ public class Room {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "room_name", nullable = false)
+    @Column(name = "r_name", nullable = false)
     private String roomName;
 
     @Column(name = "seats_num", nullable = false)
     private int numberOfSeats;
 
-    @Column(name = "conference_name")
+    @Column(name = "c_name")
     private String conferenceName;
 
     public Long getId() {

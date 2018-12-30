@@ -9,11 +9,19 @@ import com.tallink.demo.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TestController {
+
+    @PersistenceContext
+    protected EntityManager manager;
 
     @Autowired
     ConferenceRepository conferenceRepository;
@@ -135,5 +143,11 @@ public class TestController {
     @GetMapping(value = "conference/getName")
     Set<Conference> getConferenceName() {
         return conferenceRepository.getName();
+    }
+
+    @GetMapping(value = "conferenceList")
+    List<String> getConferenceList() {
+        TypedQuery<String> query = manager.createQuery("SELECT DISTINCT conferenceName FROM Conference", String.class);
+        return query.getResultList();
     }
 }

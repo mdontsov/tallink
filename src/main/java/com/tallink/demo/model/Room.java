@@ -1,42 +1,39 @@
 package com.tallink.demo.model;
 
-import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@Data
 @Entity
 @Table(name = "room")
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NonNull
-    @Column(name = "name")
-    private String name;
+    @Column(name = "r_name", nullable = false)
+    private String roomName;
 
-    @NonNull
-    @Column(name = "seats_number")
+    @Column(name = "seats_num", nullable = false)
     private int numberOfSeats;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "conference_room", joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "conference_id"))
-    private List<Conference> conference = new ArrayList<>();
+    @Column(name = "c_name")
+    private String conferenceName;
 
-    public Room() {
-
+    public Long getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Long row_id) {
+        this.id = row_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public int getNumberOfSeats() {
@@ -47,16 +44,26 @@ public class Room {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public List<Conference> getConference() {
-        return conference;
+    public String getConferenceName() {
+        return conferenceName;
     }
 
-    public void setConference(List<Conference> conference) {
-        this.conference = conference;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
-    public Room(@NonNull String name, @NonNull int numberOfSeats) {
-        this.name = name;
+    public Room(String roomName, int numberOfSeats, String conferenceName) {
+        this.roomName = roomName;
         this.numberOfSeats = numberOfSeats;
+        this.conferenceName = conferenceName;
+    }
+
+    public Room(String roomName, int numberOfSeats) {
+        this.roomName = roomName;
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public Room() {
+
     }
 }

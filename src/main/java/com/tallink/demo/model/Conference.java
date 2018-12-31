@@ -1,61 +1,36 @@
 package com.tallink.demo.model;
 
-import lombok.Data;
 import javax.persistence.*;
-import java.util.*;
 
-@Data
-@Entity(name = "Conference")
+@Entity
 @Table(name = "conference")
 public class Conference {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "guest_fname")
-    private String guest_fname;
-
-    @Column(name = "guest_lname")
-    private String guest_lname;
+    @Column(name = "c_name")
+    private String conferenceName;
 
     @Column(name = "active")
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            mappedBy = "conference")
-    private List<Room> room = new ArrayList<>();
-
-    public Conference() {
-
+    public Long getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getConferenceName() {
+        return conferenceName;
     }
 
-    public String getGuest_fname() {
-        return guest_fname;
-    }
-
-    public void setGuest_fname(String guest_fname) {
-        this.guest_fname = guest_fname;
-    }
-
-    public String getGuest_lname() {
-        return guest_lname;
-    }
-
-    public void setGuest_lname(String guest_lname) {
-        this.guest_lname = guest_lname;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
     public boolean isActive() {
@@ -66,18 +41,17 @@ public class Conference {
         this.active = active;
     }
 
-    public List<Room> getRoom() {
-        return room;
+    public Conference(String conferenceName) {
+        this.conferenceName = conferenceName;
+        this.active = true;
     }
 
-    public void setRoom(List<Room> room) {
-        this.room = room;
-    }
-
-    public Conference(String name, String guest_fname, String guest_lname, boolean active) {
-        this.name = name;
-        this.guest_fname = guest_fname;
-        this.guest_lname = guest_lname;
+    public Conference(String conferenceName, boolean active) {
+        this.conferenceName = conferenceName;
         this.active = active;
+    }
+
+    public Conference() {
+
     }
 }

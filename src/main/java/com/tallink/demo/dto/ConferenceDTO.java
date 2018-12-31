@@ -4,13 +4,11 @@ public class ConferenceDTO {
 
     private Long id;
 
-    private String name;
+    private String conferenceName;
 
-    private String guestFirstName;
+    private boolean active;
 
-    private String guestLastName;
-
-    private boolean isActive;
+    private String guestFullName;
 
     public Long getId() {
         return id;
@@ -20,43 +18,44 @@ public class ConferenceDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getConferenceName() {
+        return conferenceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGuestFirstName() {
-        return guestFirstName;
-    }
-
-    public void setGuestFirstName(String guestFirstName) {
-        this.guestFirstName = guestFirstName;
-    }
-
-    public String getGuestLastName() {
-        return guestLastName;
-    }
-
-    public void setGuestLastName(String guestLastName) {
-        this.guestLastName = guestLastName;
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
-    public ConferenceDTO(Long id, String name, String guestFirstName, String guestLastName, boolean isActive) {
+    public String getGuestFullName() {
+        return guestFullName;
+    }
+
+    public void setGuestFullName(String guestFullName) {
+        this.guestFullName = guestFullName;
+    }
+
+    public ConferenceDTO(Long id, String conferenceName, String guestFullName) {
         this.id = id;
-        this.name = name;
-        this.guestFirstName = guestFirstName;
-        this.guestLastName = guestLastName;
-        this.isActive = isActive;
+        this.conferenceName = conferenceName;
+        this.active = true;
+        this.guestFullName = guestFullName;
+    }
+
+    public ConferenceDTO(Long id, String conferenceName) {
+        this.id = id;
+        this.conferenceName = conferenceName;
+        this.active = true;
+    }
+
+    public ConferenceDTO() {
+
     }
 }

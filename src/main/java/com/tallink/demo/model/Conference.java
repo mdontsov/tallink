@@ -46,6 +46,11 @@ public class Conference {
         this.active = true;
     }
 
+    public Conference(String conferenceName, boolean active) {
+        this.conferenceName = conferenceName;
+        this.active = active;
+    }
+
     public Conference() {
 
     }

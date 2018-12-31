@@ -11,16 +11,11 @@ import com.tallink.demo.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TestController {
-
-    @PersistenceContext
-    protected EntityManager manager;
 
     @Autowired
     ConferenceRepository conferenceRepository;
@@ -84,20 +79,21 @@ public class TestController {
         guestRepository.deleteAllGuests();
     }
 
+    @GetMapping(value = "room/find")
+    public Set<Room> findRooms() {
+        return roomRepository.findRooms();
+    }
+
+    @DeleteMapping(value = "event/deleteAll")
+    public void deleteAllEvents() {
+        eventRepository.deleteAllEvents();
+    }
+
     /***********************************************************************************/
-//    @PatchMapping(value = "conference/addGuest")
-//    public void addGuest(@RequestBody Conference conference) {
-//        conferenceRepository.addGuest(conference.getGuestFullName(), conference.getConferenceName());
-//    }
     @PatchMapping(value = "guest/update")
     public void update(@RequestBody Guest guest) {
         guestRepository.updateGuestName(guest.getFullName());
     }
-
-//    @PatchMapping(value = "guest/create")
-//    public void createNew(@RequestBody Guest guest) {
-//        guestRepository.createGuest(guest.getFullName(), String.valueOf(guest.getBirthDate()));
-//    }
 
     @PatchMapping(value = "room/add")
     public void addConference(@RequestBody Room room) {
@@ -138,11 +134,6 @@ public class TestController {
     @DeleteMapping(value = "conference/deleteAll")
     public void deleteAllConferences() {
         conferenceRepository.deleteAllConferences();
-    }
-
-    @GetMapping(value = "room/find")
-    public Set<Room> findRooms() {
-        return roomRepository.findRooms();
     }
 
     @GetMapping(value = "room/findAvailable")

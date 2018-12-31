@@ -28,4 +28,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Modifying
     @Query(value = "DELETE from event WHERE c_name = ?", nativeQuery = true)
     void deleteConference(String conferenceName);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM event where id = (SELECT DISTINCT id FROM event LIMIT 1)", nativeQuery = true)
+    void deleteAllEvents();
 }
